@@ -19,7 +19,7 @@ export class Video {
   /*@arrayProp({
     ref: 'Episode',
     localField: '_id',
-    foreignField: 'course',
+    foreignField: 'video',
   })*/
   @arrayProp({itemRef: 'Episode'})
   episodes: Ref<Episode>[];
