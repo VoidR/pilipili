@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Post('upload')
-  //@UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('file'))
   async upload(@UploadedFile('file') file) {
     return {
       // ...file,

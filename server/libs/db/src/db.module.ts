@@ -10,15 +10,26 @@ const models = TypegooseModule.forFeature([User,Video,Episode]);
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot(
-      'mongodb://root:123456@localhost/pilipili?authSource=admin',
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
+    TypegooseModule.forRootAsync({
+      useFactory() {
+        return {
+          uri: process.env.DB,
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useCreateIndex: true,
+          useFindAndModify: false,
+        };
       },
-    ),
+    }),
+    // TypegooseModule.forRoot(
+    //   'mongodb://root:123456@localhost/pilipili?authSource=admin',
+    //   {
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true,
+    //     useCreateIndex: true,
+    //     useFindAndModify: false,
+    //   },
+    // ),
     models,
   ],
   providers: [DbService],
