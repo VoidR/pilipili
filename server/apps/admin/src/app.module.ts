@@ -5,9 +5,14 @@ import { DbModule } from '@libs/db';
 import { UsersModule } from './users/users.module';
 import { VideosModule } from './videos/videos.module';
 import { EpisodesModule } from './episodes/episodes.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
-  imports: [DbModule, UsersModule, VideosModule, EpisodesModule],
+  imports: [DbModule,
+    MulterModule.register({
+      dest: 'uploads'
+    }),
+     UsersModule, VideosModule, EpisodesModule],
   controllers: [AppController],
   providers: [AppService],
 })
