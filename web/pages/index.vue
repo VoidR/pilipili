@@ -1,116 +1,75 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app clipped>
-      <v-list dense>
-        <v-list-item v-for="item in items" :key="item.text" link>
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ item.text }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-subheader class="mt-4 grey--text text--darken-1"
-          >SUBSCRIPTIONS</v-subheader
-        >
-        <v-list>
-          <v-list-item v-for="item in items2" :key="item.text" link>
-            <v-list-item-avatar>
-              <img
-                :src="
-                  `https://randomuser.me/api/portraits/men/${item.picture}.jpg`
-                "
-                alt=""
-              />
-            </v-list-item-avatar>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
-          </v-list-item>
-        </v-list>
-        <v-list-item class="mt-4" link>
-          <v-list-item-action>
-            <v-icon color="grey darken-1">mdi-plus-circle-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-title class="grey--text text--darken-1"
-            >Browse Channels</v-list-item-title
-          >
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon color="grey darken-1">mdi-cog</v-icon>
-          </v-list-item-action>
-          <v-list-item-title class="grey--text text--darken-1"
-            >Manage Subscriptions</v-list-item-title
-          >
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app clipped-left color="red" dense>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-icon class="mx-4" large>
-        mdi-youtube
-      </v-icon>
-      <v-toolbar-title class="mr-12 align-center">
-        <span class="title">Youtube</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-row align="center" style="max-width: 650px">
-        <v-text-field
-          :append-icon-cb="() => {}"
-          placeholder="Search..."
-          single-line
-          append-icon="mdi-magnify"
-          color="white"
-          hide-details
-        ></v-text-field>
-      </v-row>
-    </v-app-bar>
-
-    <v-content>
-      <v-container class="fill-height">
-        <v-row justify="center" align="center">
-          <v-col class="shrink">
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>mdi-code-tags</v-icon>
-                </v-btn>
-              </template>
-              <span>Source</span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-content>
-  </v-app>
+  <v-layout column justify-center align-center>
+    <v-flex xs12 sm8 md6>
+      <div class="text-center">
+        <logo />
+        <vuetify-logo />
+      </div>
+      <v-card>
+        <v-card-title class="headline">
+          Welcome to the Vuetify + Nuxt.js template
+        </v-card-title>
+        <v-card-text>
+          <p>
+            Vuetify is a progressive Material Design component framework for
+            Vue.js. It was designed to empower developers to create amazing
+            applications.
+          </p>
+          <p>
+            For more information on Vuetify, check out the
+            <a href="https://vuetifyjs.com" target="_blank"> documentation </a>.
+          </p>
+          <p>
+            If you have questions, please join the official
+            <a href="https://chat.vuetifyjs.com/" target="_blank" title="chat">
+              discord </a
+            >.
+          </p>
+          <p>
+            Find a bug? Report it on the github
+            <a
+              href="https://github.com/vuetifyjs/vuetify/issues"
+              target="_blank"
+              title="contribute"
+            >
+              issue board </a
+            >.
+          </p>
+          <p>
+            Thank you for developing with Vuetify and I look forward to bringing
+            more exciting features in the future.
+          </p>
+          <div class="text-xs-right">
+            <em><small>&mdash; John Leider</small></em>
+          </div>
+          <hr class="my-3" />
+          <a href="https://nuxtjs.org/" target="_blank">
+            Nuxt Documentation
+          </a>
+          <br />
+          <a href="https://github.com/nuxt/nuxt.js" target="_blank">
+            Nuxt GitHub
+          </a>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn color="primary" nuxt to="/inspire">
+            Continue
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
+import Logo from '~/components/Logo.vue'
+import VuetifyLogo from '~/components/VuetifyLogo.vue'
+
 export default {
-  props: {
-    source: String
-  },
-  data: () => ({
-    drawer: null,
-    items: [
-      { icon: 'mdi-trending-up', text: 'Most Popular' },
-      { icon: 'mdi-youtube-subscription', text: 'Subscriptions' },
-      { icon: 'mdi-history', text: 'History' },
-      { icon: 'mdi-playlist-play', text: 'Playlists' },
-      { icon: 'mdi-clock', text: 'Watch Later' }
-    ],
-    items2: [
-      { picture: 28, text: 'Joseph' },
-      { picture: 38, text: 'Apple' },
-      { picture: 48, text: 'Xbox Ahoy' },
-      { picture: 58, text: 'Nokia' },
-      { picture: 78, text: 'MKBHD' }
-    ]
-  }),
-  created() {
-    this.$vuetify.theme.dark = true
+  components: {
+    Logo,
+    VuetifyLogo
   }
 }
 </script>
