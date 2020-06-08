@@ -21,7 +21,7 @@ export class EpisodesController {
 
   @Get('option')
   async option() {
-    const viedos = (await this.VideoModel.find()).map(v => ({
+    const videos = (await this.VideoModel.find()).map(v => ({
       label: v.name,
       value: v._id,
     }));
@@ -30,12 +30,12 @@ export class EpisodesController {
       translate: false,
       column: [
         {
-          prop: 'name',
-          label: '名称',
+          prop: 'video',
+          label: '所属',
           type: 'select',
-          dicData: viedos,
+          dicData: videos,
         },
-        { prop: 'index', label: '集号', span: 6,},
+        { prop: 'index', label: '集号', span: 6 },
         {
           prop: 'file',
           label: '视频源',

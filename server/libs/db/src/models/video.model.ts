@@ -5,10 +5,11 @@ import { Episode } from './episode.model';
 @modelOptions({
   schemaOptions: {
     timestamps: true,
+    toJSON: { virtuals: true },
   },
 })
 export class Video {
-  @ApiProperty({ description: '视频名称' })
+  @ApiProperty({ description: '视频名称', example: 'name'  })
   @prop()
   name: string;
 
@@ -16,11 +17,10 @@ export class Video {
   @prop()
   cover: string;
 
-  /*@arrayProp({
+  @arrayProp({
     ref: 'Episode',
     localField: '_id',
     foreignField: 'video',
-  })*/
-  @arrayProp({itemRef: 'Episode'})
+  })
   episodes: Ref<Episode>[];
 }
