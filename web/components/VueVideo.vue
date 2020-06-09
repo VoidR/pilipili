@@ -1,63 +1,32 @@
 <template>
-  <div class="pa-3">
-    <h3>视频播放界面</h3>
-    <h3>{{ video.name }}</h3>
-    <div>{{ episode.file }}</div>
-    <v-select
-      v-model="currentIndex"
-      :items="video.episodes.map((v, i) => ({ text: v.index, value: i }))"
-    ></v-select>
-    <section class="vueVideo">
-      <div
-        v-video-player:myVideoPlayer="playerOptions"
-        class="video-player-box"
-        :playsinline="playsinline"
-        @play="onPlayerPlay($event)"
-        @pause="onPlayerPause($event)"
-        @ended="onPlayerEnded($event)"
-        @loadeddata="onPlayerLoadeddata($event)"
-        @waiting="onPlayerWaiting($event)"
-        @playing="onPlayerPlaying($event)"
-        @timeupdate="onPlayerTimeupdate($event)"
-        @canplay="onPlayerCanplay($event)"
-        @canplaythrough="onPlayerCanplaythrough($event)"
-        @ready="playerReadied"
-        @statechanged="playerStateChanged($event)"
-      ></div>
-    </section>
-  </div>
+  <section class="vueVideo">
+    <div
+      v-video-player:myVideoPlayer="playerOptions"
+      class="video-player-box"
+      :playsinline="playsinline"
+      @play="onPlayerPlay($event)"
+      @pause="onPlayerPause($event)"
+      @ended="onPlayerEnded($event)"
+      @loadeddata="onPlayerLoadeddata($event)"
+      @waiting="onPlayerWaiting($event)"
+      @playing="onPlayerPlaying($event)"
+      @timeupdate="onPlayerTimeupdate($event)"
+      @canplay="onPlayerCanplay($event)"
+      @canplaythrough="onPlayerCanplaythrough($event)"
+      @ready="playerReadied"
+      @statechanged="playerStateChanged($event)"
+    ></div>
+  </section>
 </template>
 
 <script>
 import 'video.js/dist/video-js.css'
 import 'vue-video-player/src/custom-theme.css'
 export default {
-  components: {},
-
-  async asyncData({ params, $axios }) {
-    const { id } = params
-    const video = await $axios.$get(`videos/${id}`, {
-      params: {
-        query: { populate: 'episodes' }
-      }
-    })
-    return {
-      id,
-      video
-    }
-  },
   data() {
     return {
-      currentIndex: 0,
-      playsinline: true
-    }
-  },
-  computed: {
-    episode() {
-      return this.video.episodes[this.currentIndex]
-    },
-    playerOptions() {
-      const opt = {
+      playsinline: true,
+      playerOptions: {
         // 播放器配置
         muted: false, // 是否静音
         language: 'zh-CN',
@@ -68,16 +37,18 @@ export default {
         fluid: true,
         sources: [
           {
-            type: 'application/x-mpegURL',
-            src: this.episode.file
+            type: 'application/x-mpegURL/video/mp4',
+            src:
+              'http://player.gqyy.org/?url=http://fuli.zuida-youku-le.com/20180420/23151_fc9b9ec0/index.m3u8'
           }
         ],
         notSupportedMessage: '此视频暂无法播放，请稍后再试'
       }
-      return opt
     }
   },
-  mounted() {},
+  mounted() {
+    console.log('this is current player instance object', this.myVideoPlayer)
+  },
   methods: {
     // 监听播放
     onPlayerPlay(player) {
@@ -134,4 +105,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>
