@@ -7,14 +7,14 @@
       v-model="currentIndex"
       :items="video.episodes.map((v, i) => ({ text: v.index, value: i }))"
     ></v-select>
-    <video
+    <!-- <video
       controls
       preload="auto"
       style="width: 100%;height: auto"
       :poster="poster"
       src="{{episode.file}}"
       type="application/x-mpegURL"
-    ></video>
+    ></video> -->
   </div>
 </template>
 
