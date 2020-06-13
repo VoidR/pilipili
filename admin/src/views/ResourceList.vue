@@ -84,7 +84,6 @@ export default class ResourceList extends Vue {
   async update(row, index, done) {
     const data = JSON.parse(JSON.stringify(row));
     delete data.$index;
-    //await this.$http.put(`${this.resource}/${row._id}`, data);
     await this.$http.put(`${this.resource}/${row._id}`, data);
     this.$message.success("更新成功");
     this.fetch();

@@ -6,13 +6,11 @@
       <v-col v-for="item in videos" :key="item._id" md="3">
         <v-card :to="`/videos/${item._id}`" class="mx-auto" max-width="344">
           <v-card-text>
-            <div>Word of the Day</div>
             <p class="display-1 text--primary">
               {{ item.name }}
             </p>
-            <p>adjective</p>
             <div class="text--primary">
-              {{ item.createdAt }}
+              {{ item.detail }}
             </div>
           </v-card-text>
           <v-card-actions>
@@ -30,7 +28,6 @@
 export default {
   async asyncData({ $axios }) {
     const data = await $axios.$get('videos')
-
     return {
       videos: data.data
     }

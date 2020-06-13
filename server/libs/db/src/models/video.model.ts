@@ -9,13 +9,13 @@ import { Episode } from './episode.model';
   },
 })
 export class Video {
-  @ApiProperty({ description: '视频名称', example: 'name'  })
+  @ApiProperty({ description: '视频名称', example: 'name' })
   @prop()
   name: string;
 
-  @ApiProperty({ description: '封面图' })
+  @ApiProperty({ description: '视频源' })
   @prop()
-  cover: string;
+  detail: string;
 
   @arrayProp({
     ref: 'Episode',

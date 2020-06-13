@@ -20,8 +20,16 @@ export class VideosController {
     return {
       title: '视频管理',
       column: [
-        { prop: 'name', label: '视频名称', sortable: true, search: true, regex:true, row:true},
-        { prop: 'cover', label: '视频封面图', type: 'upload', width: 120, listType: 'picture-img', row: true, action: 'upload'},
+        {
+          prop: 'name',
+          label: '视频名称',
+          sortable: true,
+          search: true,
+          regex: true,
+          row: true,
+        },
+        { prop: 'detail', label: '视频详情', width: '650px', row: true },
+        //{ prop: 'cover', label: '视频源', type: 'upload', width: 120, listType: 'picture-img', row: true, action: 'upload'},
       ],
     };
   }
