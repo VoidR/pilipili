@@ -17,7 +17,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "consola": "^2.12.2",
     "hls.js": "^0.13.2",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "videojs-contrib-hls": "^5.15.0",
     "vue-video-player": "^5.0.2"
   },
